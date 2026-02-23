@@ -282,7 +282,7 @@ export default function FarmTracker() {
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-2xl border-2 border-amber-200 shadow-lg">
+          <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 md:p-6 rounded-2xl border-2 border-amber-200 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <Egg className="w-8 h-8 text-amber-600" />
               <span className="text-sm font-semibold text-amber-700 bg-amber-100 px-3 py-1 rounded-full">కోళ్ళు</span>
@@ -305,7 +305,7 @@ export default function FarmTracker() {
             </div>
           </div>
           
-          <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-6 rounded-2xl border-2 border-emerald-200 shadow-lg">
+          <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-4 md:p-6 rounded-2xl border-2 border-emerald-200 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <Leaf className="w-8 h-8 text-emerald-600" />
               <span className="text-sm font-semibold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">చెట్లు</span>
@@ -329,7 +329,7 @@ export default function FarmTracker() {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-md">
+        <div className="bg-white p-4 md:p-6 rounded-2xl border border-stone-200 shadow-md">
           <h3 className="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
             <BarChart3 className="w-5 h-5" />
             Performance Comparison
@@ -378,7 +378,7 @@ export default function FarmTracker() {
         <div className="animate-marquee whitespace-nowrap">
           <span className="text-sm font-medium px-4">📰 Latest News: {newsText}</span>
         </div>
-        <style jsx>{`
+        <style>{`
           @keyframes marquee {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
@@ -393,14 +393,14 @@ export default function FarmTracker() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-green-50 overflow-x-hidden">
       <header className="bg-gradient-to-r from-green-800 via-emerald-700 to-green-800 text-white shadow-xl">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <h1 className="text-4xl font-bold mb-4 tracking-tight">ఇంటి ఎనక</h1>
-          <nav className="flex gap-4">
+        <div className="max-w-7xl mx-auto px-3 md:px-6 py-4 md:py-6">
+          <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 tracking-tight">ఇంటి ఎనక</h1>
+          <nav className="flex flex-wrap gap-2 md:gap-4">
             <button
               onClick={() => setCurrentView('poultry')}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+              className={`px-3 md:px-6 py-2 md:py-3 rounded-xl font-semibold transition-all text-sm md:text-base ${
                 currentView === 'poultry' ? 'bg-white text-green-800 shadow-lg' : 'bg-white/20 text-white hover:bg-white/30'
               }`}
             >
@@ -408,7 +408,7 @@ export default function FarmTracker() {
             </button>
             <button
               onClick={() => setCurrentView('garden')}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+              className={`px-3 md:px-6 py-2 md:py-3 rounded-xl font-semibold transition-all text-sm md:text-base ${
                 currentView === 'garden' ? 'bg-white text-green-800 shadow-lg' : 'bg-white/20 text-white hover:bg-white/30'
               }`}
             >
@@ -416,7 +416,7 @@ export default function FarmTracker() {
             </button>
             <button
               onClick={() => setCurrentView('overall')}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+              className={`px-3 md:px-6 py-2 md:py-3 rounded-xl font-semibold transition-all text-sm md:text-base ${
                 currentView === 'overall' ? 'bg-white text-green-800 shadow-lg' : 'bg-white/20 text-white hover:bg-white/30'
               }`}
             >
@@ -424,7 +424,7 @@ export default function FarmTracker() {
             </button>
             <button
               onClick={() => setCurrentView('admin')}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all flex items-center gap-2 ${
+              className={`px-3 md:px-6 py-2 md:py-3 rounded-xl font-semibold transition-all flex items-center gap-2 text-sm md:text-base ${
                 currentView === 'admin' ? 'bg-white text-green-800 shadow-lg' : 'bg-white/20 text-white hover:bg-white/30'
               }`}
             >
@@ -437,13 +437,13 @@ export default function FarmTracker() {
 
       <NewsTicker />
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-3 md:px-6 py-4 md:py-8">
         {currentView === 'poultry' && (
           <div>
-            <h2 className="text-3xl font-bold text-amber-900 mb-6 text-center">కోళ్ళు</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-amber-900 mb-4 md:mb-6 text-center">కోళ్ళు</h2>
             
             {/* Egg Production Stats */}
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-2xl border-2 border-amber-200 shadow-lg mb-6">
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 md:p-6 rounded-2xl border-2 border-amber-200 shadow-lg mb-6">
               <h3 className="text-xl font-bold text-amber-900 mb-4 flex items-center gap-2">
                 <Egg className="w-5 h-5" />
                 Egg Production
@@ -461,7 +461,7 @@ export default function FarmTracker() {
             </div>
             
             {/* Flock Statistics */}
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-2xl border-2 border-amber-200 shadow-lg mb-6">
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 md:p-6 rounded-2xl border-2 border-amber-200 shadow-lg mb-6">
               <h3 className="text-xl font-bold text-amber-900 mb-4 flex items-center gap-2">
                 <BarChart3 className="w-5 h-5" />
                 Flock Statistics
@@ -495,7 +495,7 @@ export default function FarmTracker() {
             </div>
             
             {/* Recent Records */}
-            <div className="bg-white p-6 rounded-2xl border-2 border-amber-200 shadow-lg">
+            <div className="bg-white p-4 md:p-6 rounded-2xl border-2 border-amber-200 shadow-lg">
               <h3 className="text-xl font-bold text-amber-900 mb-6">Recent Records</h3>
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -533,15 +533,15 @@ export default function FarmTracker() {
 
         {currentView === 'garden' && (
           <div>
-            <h2 className="text-3xl font-bold text-emerald-900 mb-6 text-center">చెట్లు</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-emerald-900 mb-4 md:mb-6 text-center">చెట్లు</h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-1 bg-white p-6 rounded-2xl border-2 border-emerald-200 shadow-lg">
-                <h3 className="text-xl font-bold text-emerald-900 mb-6 text-center">Plant Health Distribution</h3>
+              <div className="lg:col-span-1 bg-white p-4 md:p-6 rounded-2xl border-2 border-emerald-200 shadow-lg">
+                <h3 className="text-lg md:text-xl font-bold text-emerald-900 mb-4 md:mb-6 text-center">Plant Health Distribution</h3>
                 <PieChart />
               </div>
 
-              <div className="lg:col-span-2 bg-white p-6 rounded-2xl border-2 border-emerald-200 shadow-lg">
-                <h3 className="text-xl font-bold text-emerald-900 mb-6">Garden Records</h3>
+              <div className="lg:col-span-2 bg-white p-4 md:p-6 rounded-2xl border-2 border-emerald-200 shadow-lg">
+                <h3 className="text-lg md:text-xl font-bold text-emerald-900 mb-4 md:mb-6">Garden Records</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
@@ -593,23 +593,23 @@ export default function FarmTracker() {
 
         {currentView === 'overall' && (
           <div>
-            <h2 className="text-3xl font-bold text-stone-900 mb-6 text-center">Overall Records</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-stone-900 mb-4 md:mb-6 text-center">Overall Records</h2>
             <PerformanceOverview />
           </div>
         )}
 
         {currentView === 'admin' && (
-          <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-green-900 mb-6 text-center">Admin Panel</h2>
+          <div className="space-y-6 md:space-y-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-green-900 mb-4 md:mb-6 text-center">Admin Panel</h2>
             
             {/* Poultry Data Management */}
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-2xl border-2 border-amber-200">
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 md:p-6 rounded-2xl border-2 border-amber-200">
               <h3 className="text-xl font-bold text-amber-900 mb-4 flex items-center gap-2">
                 <Egg className="w-5 h-5" />
                 Poultry Data
               </h3>
               
-              <div className="bg-white p-5 rounded-xl border border-amber-200 mb-4">
+              <div className="bg-white p-3 md:p-5 rounded-xl border border-amber-200 mb-4">
                 <h4 className="font-semibold text-amber-800 mb-3">Egg Production</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -633,7 +633,7 @@ export default function FarmTracker() {
                 </div>
               </div>
               
-              <div className="bg-white p-5 rounded-xl border border-amber-200 mb-4">
+              <div className="bg-white p-3 md:p-5 rounded-xl border border-amber-200 mb-4">
                 <h4 className="font-semibold text-amber-800 mb-3">Flock Statistics</h4>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {[
@@ -657,7 +657,7 @@ export default function FarmTracker() {
                 </div>
               </div>
               
-              <div className="bg-white p-4 rounded-xl border border-amber-200 mb-4">
+              <div className="bg-white p-3 md:p-4 rounded-xl border border-amber-200 mb-4">
                 <h4 className="font-semibold text-amber-800 mb-3">Add Poultry Record</h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
                   <input
@@ -712,12 +712,12 @@ export default function FarmTracker() {
             </div>
 
             {/* Garden Data Management */}
-            <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-6 rounded-2xl border-2 border-emerald-200">
+            <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-4 md:p-6 rounded-2xl border-2 border-emerald-200">
               <h3 className="text-xl font-bold text-emerald-900 mb-4 flex items-center gap-2">
                 <Leaf className="w-5 h-5" />
                 Garden Data
               </h3>
-              <div className="bg-white p-4 rounded-xl border border-emerald-200 mb-4">
+              <div className="bg-white p-3 md:p-4 rounded-xl border border-emerald-200 mb-4">
                 <h4 className="font-semibold text-emerald-800 mb-3">Add Garden Record</h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
                   <input
@@ -796,9 +796,9 @@ export default function FarmTracker() {
             </div>
 
             {/* News Management */}
-            <div className="bg-gradient-to-br from-stone-50 to-stone-100 p-6 rounded-2xl border-2 border-stone-300">
+            <div className="bg-gradient-to-br from-stone-50 to-stone-100 p-4 md:p-6 rounded-2xl border-2 border-stone-300">
               <h3 className="text-xl font-bold text-stone-900 mb-4">News & Updates</h3>
-              <div className="bg-white p-4 rounded-xl border border-stone-300 mb-4">
+              <div className="bg-white p-3 md:p-4 rounded-xl border border-stone-300 mb-4">
                 <div className="grid grid-cols-1 gap-3 mb-3">
                   <input
                     type="text"
