@@ -366,17 +366,80 @@ export default function FarmTracker() {
     );
   };
 
-  // News Ticker Component
-  const NewsTicker = () => {
-    if (newsItems.length === 0) return null;
+  // Event Ticker Component
+  const EventTicker = () => {
+    // Collect all events from three sources
+    const allEvents = [];
     
-    const sortedNews = newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
-    const newsText = sortedNews.map(n => `${n.title}: ${n.content}`).join(' • ');
+    // 1. News & Updates
+    newsItems.forEach(item => {
+      if (item.date && item.title) {
+        allEvents.push({
+          date: item.date,
+          text: `${item.title}: ${item.content}`
+        });
+      }
+    });
+    
+    // 2. Poultry Records
+    poultryRecords.forEach(record => {
+      if (record.date && record.event) {
+        const notesText = record.notes ? ` - ${record.notes}` : '';
+        allEvents.push({
+          date: record.date,
+          text: `${record.event}${notesText}`
+        });
+      }
+    });
+    
+    // 3. Garden Records
+    gardenRecords.forEach(record => {
+      if (record.planted && record.plant) {
+        const varietyText = record.variety ? ` (${record.variety})` : '';
+        allEvents.push({
+          date: record.planted,
+          text: `${record.plant}${varietyText} planted`
+        });
+      }
+    });
+    
+    if (allEvents.length === 0) return null;
+    
+    // Group events by date and merge on same day
+    const eventsByDate = {};
+    allEvents.forEach(event => {
+      const dateKey = event.date;
+      if (!eventsByDate[dateKey]) {
+        eventsByDate[dateKey] = [];
+      }
+      eventsByDate[dateKey].push(event);
+    });
+    
+    // Merge events by date
+    const mergedEvents = Object.entries(eventsByDate).map(([date, events]) => {
+      const texts = events.map(e => e.text);
+      return { date, text: texts.join(', ') };
+    });
+    
+    // Sort by date descending and take last 1
+    const sortedEvents = mergedEvents
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 1);
+    
+    if (sortedEvents.length === 0) return null;
+    
+    // Build display text with | separator
+    const displayText = sortedEvents.map(e => e.text).join(' | ');
     
     return (
       <div className="bg-gradient-to-r from-green-700 to-emerald-600 text-white py-2 overflow-hidden">
-        <div className="animate-marquee whitespace-nowrap">
-          <span className="text-sm font-medium px-4">📰 Latest News: {newsText}</span>
+        <div className="overflow-hidden whitespace-nowrap">
+          <div className="inline-flex items-center animate-marquee">
+            <span className="text-sm font-medium px-2 flex items-center shrink-0">
+              <span className="bg-red-500 text-white text-xs px-1.5 py-0.5 rounded font-bold mr-2 shadow-sm">NEW</span>
+              {displayText}
+            </span>
+          </div>
         </div>
         <style>{`
           @keyframes marquee {
@@ -384,8 +447,7 @@ export default function FarmTracker() {
             100% { transform: translateX(-100%); }
           }
           .animate-marquee {
-            display: inline-block;
-            animation: marquee 30s linear infinite;
+            animation: marquee 15s linear infinite;
           }
         `}</style>
       </div>
@@ -420,7 +482,7 @@ export default function FarmTracker() {
                 currentView === 'overall' ? 'bg-white text-green-800 shadow-lg' : 'bg-white/20 text-white hover:bg-white/30'
               }`}
             >
-              Overall Records
+              Stats
             </button>
             <button
               onClick={() => setCurrentView('admin')}
@@ -435,7 +497,7 @@ export default function FarmTracker() {
         </div>
       </header>
 
-      <NewsTicker />
+      <EventTicker />
 
       <div className="max-w-7xl mx-auto px-3 md:px-6 py-4 md:py-8">
         {currentView === 'poultry' && (
@@ -593,7 +655,7 @@ export default function FarmTracker() {
 
         {currentView === 'overall' && (
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-stone-900 mb-4 md:mb-6 text-center">Overall Records</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-stone-900 mb-4 md:mb-6 text-center">Stats</h2>
             <PerformanceOverview />
           </div>
         )}
