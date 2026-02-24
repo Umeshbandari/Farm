@@ -14,7 +14,7 @@ export default function FarmTracker() {
   const [maleHens, setMaleHens] = useState(0);
   const [chicks, setChicks] = useState(0);
   const [layingHens, setLayingHens] = useState(0);
-  const [hatchingEggs, setHatchingEggs] = useState(0);
+  const [incubatingHens, setIncubatingHens] = useState(0);
   const [poultryRecords, setPoultryRecords] = useState([]);
   
   // Garden state
@@ -69,7 +69,7 @@ export default function FarmTracker() {
         setMaleHens(stats.maleHens || 0);
         setChicks(stats.chicks || 0);
         setLayingHens(stats.layingHens || 0);
-        setHatchingEggs(stats.hatchingEggs || 0);
+        setIncubatingHens(stats.incubatingHens || 0);
       }
       
       // 2. Load poultry records
@@ -104,7 +104,7 @@ export default function FarmTracker() {
   const savePoultryStats = async () => {
     const stats = {
       todaysEggs, totalEggsStock, totalHens, femaleHens, 
-      maleHens, chicks, layingHens, hatchingEggs
+      maleHens, chicks, layingHens, incubatingHens
     };
     await setDoc(doc(db, 'farmData', 'poultryStats'), stats);
   };
@@ -140,7 +140,7 @@ export default function FarmTracker() {
     if (totalHens > 0 || todaysEggs > 0 || totalEggsStock > 0) {
       savePoultryStats();
     }
-  }, [todaysEggs, totalEggsStock, totalHens, femaleHens, maleHens, chicks, layingHens, hatchingEggs]);
+  }, [todaysEggs, totalEggsStock, totalHens, femaleHens, maleHens, chicks, layingHens, incubatingHens]);
 
   // Admin functions
   const addPoultryRecord = () => {
@@ -488,8 +488,8 @@ export default function FarmTracker() {
                   <div className="text-sm text-amber-600">Laying Hens</div>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-amber-200 text-center">
-                  <div className="text-2xl font-bold text-amber-900">{hatchingEggs}</div>
-                  <div className="text-sm text-amber-600">Hatching Eggs</div>
+                  <div className="text-2xl font-bold text-amber-900">{incubatingHens}</div>
+                  <div className="text-sm text-amber-600">Incubating Hens</div>
                 </div>
               </div>
             </div>
@@ -642,7 +642,7 @@ export default function FarmTracker() {
                     { label: 'Male', value: maleHens, setter: setMaleHens },
                     { label: 'Chicks', value: chicks, setter: setChicks },
                     { label: 'Laying Hens', value: layingHens, setter: setLayingHens },
-                    { label: 'Hatching Eggs', value: hatchingEggs, setter: setHatchingEggs },
+                    { label: 'Incubating Hens', value: incubatingHens, setter: setIncubatingHens },
                   ].map((field) => (
                     <div key={field.label}>
                       <label className="text-xs font-medium text-amber-700 mb-1 block">{field.label}</label>
